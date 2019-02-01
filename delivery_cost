@@ -1,0 +1,30 @@
+$cost = array();
+$price = (float)$_GET['price'];
+$weight = (float)$_GET['weight'];
+
+
+class DeliveryCalc {
+   public function __construct($price, $weight){
+       $this->price=$price;
+       $this->weight=$weight;
+   }
+   public function getCost(){
+       return $this->price*$this->weight;
+   }
+
+}
+
+if(isset($price) && isset($weight)){
+   if($price > 0 && $weight > 0){
+       $deliveryItem = new DeliveryCalc($price, $weight);
+       $cost['delieveryCost'] = $deliveryItem->getCost();
+       $json = json_encode($cost);
+       echo($json);
+   }
+   else{
+       echo "Не верно указаны параметры";
+   }
+}
+else{
+   echo "Не верно указаны параметры";
+}
